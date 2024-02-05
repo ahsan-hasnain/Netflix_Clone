@@ -24,7 +24,6 @@ export default function BannerScreen() {
                     name: movie.original_title
                 }));
                 setRelatedMovies(movies);
-                console.log(relatedMovies);
 
             } catch (error) {
                 console.error('Error fetching related movies:', error);

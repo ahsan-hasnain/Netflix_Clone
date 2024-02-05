@@ -10,6 +10,7 @@ import { useUser } from '../contexts/userContext.tsx';
 import { styled } from '@mui/system';
 import { Background } from '../components/background.tsx';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../components/loader.tsx';
 
 const StyledPaper = styled(Paper)({
   padding: '20px',
@@ -35,16 +36,17 @@ const StyledForgotPasswordLink = styled(Link)({
   marginTop: '8px',
 });
 
-export const Login: React.FC = () => {
-  const { signIn } = useUser();
+export const Login = ({handleAuth}) => {
+  const { signIn, loading } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await signIn(email, password).then(()=>navigate('/protected'));
+      await signIn(email, password).then(()=>navigate('/movies'));
+      handleAuth(true)
     } catch (error) {
       console.error('Error signing in:', error.message);
       // Handle error
@@ -91,8 +93,8 @@ export const Login: React.FC = () => {
           onChange={handleChange2}
           autoComplete="current-password"
         />
-        <StyledSubmitButton type="submit" fullWidth variant="contained" color="primary" onClick={handleSignIn}>
-          Sign In
+        <StyledSubmitButton type="submit" fullWidth variant="contained" color="primary" onClick={handleSignIn} disabled={loading}>
+          {loading ? <p>loading</p>: <p>Sign In</p>}
         </StyledSubmitButton>
         <StyledForgotPasswordLink  variant="body2">
           Forgot password?

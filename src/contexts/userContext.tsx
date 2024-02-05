@@ -25,7 +25,6 @@ type ProviderProps = {
 export const UserProvider = (props: ProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
@@ -34,7 +33,6 @@ export const UserProvider = (props: ProviderProps) => {
 
     return () => unsubscribe();
   }, []);
-
   const signIn = async (email: string, password: string): Promise<any> => {
     return signInWithEmailAndPassword(auth, email, password);
   };

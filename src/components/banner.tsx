@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { Stack } from '@mui/system';
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { MyButton } from './myButton.tsx';
 import Loader from './loader.tsx';
 
@@ -10,8 +10,8 @@ export const Banner = ({ movieid }) => {
   const [videoId, setVideoId] = useState<any>()
   const [played, setPlayed] = useState(false)
   const imagePath = `https://image.tmdb.org/t/p/original`;
-  function handleChange(){
-    setPlayed(false)
+  function handleChange() {
+    setPlayed(true)
   }
   useEffect(() => {
     console.log(movieid);
@@ -26,55 +26,45 @@ export const Banner = ({ movieid }) => {
     async function fetchMovie() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieid}?api_key=11733ba9ebc594f27734034ba07ac007`, options
+          `https://api.themoviedb.org/3/movie/${movieid}?api_key=11733ba9ebc594f27734034ba07ac007&append_to_response=videos`, options
         );
         const parsedResponse = await response.json()
         console.log(parsedResponse);
+        const video = parsedResponse.videos.results.length > 0 ? parsedResponse.videos.results[0].key : null;
+        console.log(video);
 
         setMovie(parsedResponse)
+        setVideoId(video)
 
       } catch (error) {
         console.error('Error fetching movie images:', error);
       }
     }
     fetchMovie()
-    async function fetchVideo(){
-        try {
-          const response = await fetch(`https://api.themoviedb.org/3/movie/${movieid}/videos?api_key=11733ba9ebc594f27734034ba07ac007`)
-          const parsedResponse = await response.json()
-          const video = parsedResponse.data.results.length > 0 ? parsedResponse.data.results[0].key : null;
-          console.log(parsedResponse);
-          
-          if(videoId){
-            setVideoId(video)
-          }
-        } catch (error) {
-          
-        }
-    }
-  fetchVideo()
   }, [movieid])
 
   return (
     <Container>
       {movie ? <div className="hero">
-        {played?
-         <h2>video played</h2>
-        :
-        <iframe width="560" height="315" src={`https://www.youtube.com/embed/4XKjtyMb_6A}`} title="Embedded Video" frameBorder="0" allowFullScreen></iframe>
-        
-        }
-        <div className="container">
-          <Stack direction={'column'} spacing={3} marginInlineStart={8} width={500}>
-            <Typography variant='h3'>{movie.tile || movie.original_title}</Typography>
-            <Typography variant='body2'>{movie.overview}</Typography>
-            <Stack direction={'row'} spacing={3}>
-              <MyButton variant='contained' color={'secondary'} onClick={handleChange}>Play</MyButton>
-              <MyButton variant='contained' color='info' opacity='0.9'>Play</MyButton>
+        {played ?
+          <iframe  width="560" height="315" src={`https://www.youtube.com/embed/${videoId}?showinfo=0`} title="Embedded Video" frameBorder="0" allowFullScreen></iframe>
+          :
+          <div>
+            <img src={imagePath + movie.backdrop_path} />
 
-            </Stack>
-          </Stack>
-        </div>
+
+            <div className="container">
+              <Stack direction={'column'} spacing={3} marginInlineStart={8} width={500}>
+                <Typography variant='h3'>{movie.tile || movie.original_title}</Typography>
+                <Typography variant='body2'>{movie.overview}</Typography>
+                <Stack direction={'row'} spacing={3}>
+                  <Button variant='contained' onClick={handleChange} color='secondary'>Play</Button>
+
+
+                </Stack>
+              </Stack>
+            </div>
+          </div>}
       </div> : <Loader />}
     </Container>
   )
@@ -86,7 +76,7 @@ const Container = styled.div`
   .hero {
     position: relative;
     .background-image {
-      filter: brightness(60%);
+      filter: brightness(40%);
     }
     img, iframe {
       height: 80vh;
@@ -110,7 +100,7 @@ const Container = styled.div`
       }
     }
   }
-`;{/* <img
+`; {/* <img
 src={imagePath + movie.backdrop_path}
 alt="background"
 className="background-image"

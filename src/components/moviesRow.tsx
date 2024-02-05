@@ -24,7 +24,7 @@ export const MoviesRow = (props) => {
 
                 {props.images.map(url => {
                     return (
-                        <Grid item xs={2.4} >
+                        <Grid item lg={2.4} md={3} sm={4} xs={12} key={url.name}>
                             <Link to={`/banner/${url.id}`}>
                             <Image src={imagePath + url.imagePath}/>
                             </Link>
