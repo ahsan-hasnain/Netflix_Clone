@@ -58,6 +58,7 @@ const App = ()=> {
         </Route>
         <Route path='/banner/:movieid' element={<BannerScreen />}/>
         <Route path='/login' element={<Login handleAuth={handleAuth}/>}/>
+        <Route path='/signup' element={<Login handleAuth={handleAuth}/>}/>
         
       </Routes>
     </ThemeProvider>

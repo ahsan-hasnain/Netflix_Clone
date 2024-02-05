@@ -10,7 +10,6 @@ import { useUser } from '../contexts/userContext.tsx';
 import { styled } from '@mui/system';
 import { Background } from '../components/background.tsx';
 import { useNavigate } from 'react-router-dom';
-import Loader from '../components/loader.tsx';
 
 const StyledPaper = styled(Paper)({
   padding: '20px',
