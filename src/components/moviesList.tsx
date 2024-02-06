@@ -38,6 +38,7 @@ export const MoviesList = ({ query, type }) => {
 
         setMovies(parsedResponse.results);
         setLoading(false);
+        
 
         const movieImages = parsedResponse.results.map((movie) => ({
           id: movie.id,

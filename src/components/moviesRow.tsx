@@ -28,7 +28,7 @@ export const MoviesRow = (props) => {
                             <Link to={`/banner/${url.id}`}>
                             <Image src={imagePath + url.imagePath}/>
                             </Link>
-                            <Typography variant='h5' color={'white'}>{url.name}</Typography>
+                            <Typography variant='h5' color={'white'}>{url.name || url.original_name || url.title || url.original_title}</Typography>
                         </Grid>
                     )
                 })}
