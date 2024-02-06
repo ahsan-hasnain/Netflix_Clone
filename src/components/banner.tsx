@@ -47,7 +47,7 @@ export const Banner = ({ movieid }) => {
     <Container>
       {movie ? <div className="hero">
         {played ?
-          <iframe  width="560" height="315" src={`https://www.youtube.com/embed/${videoId}?showinfo=0`} title="Embedded Video" frameBorder="0" allowFullScreen></iframe>
+          <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoId}?showinfo=0`} title="Embedded Video" frameBorder="0" allowFullScreen></iframe>
           :
           <div>
             <img src={imagePath + movie.backdrop_path} />
