@@ -5,17 +5,18 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link } from '@mui/material';
-import { Link as Rlink } from 'react-router-dom';
+import { MyInput } from '../components/myInput.tsx';
 import { useUser } from '../contexts/userContext.tsx';
 import { Background } from '../components/background.tsx';
 import { useNavigate } from 'react-router-dom';
-import { style, styled } from '@mui/system';
+import {  styled } from '@mui/system';
 
 
 const StyledPaper = styled(Paper)({
   padding: '20px',
   maxWidth: '400px',
   margin: 'auto',
+  color:'black',
   marginTop: '100px',
   display: 'flex',
   flexDirection: 'column',
@@ -48,7 +49,7 @@ export const SignUp = ({ handleAuth }) => {
       await signUp(email, password).then(() => navigate('/movies'));
       handleAuth(true);
     } catch (error) {
-      console.error('Error signing up:', error.message);
+      alert(`Error signing up:, ${error.message}`);
       // Handle error
     }
   };
@@ -57,22 +58,19 @@ export const SignUp = ({ handleAuth }) => {
   return (
     <Background>
       <StyledPaper elevation={3}>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom color={'black'}>
           Sign Up
         </Typography>
         <StyledForm>
           <TextField
-            variant="filled"
+            variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
+            label="Email Addres"
             name="email"
-            autoComplete="email"
-            autoFocus
             value={email}
-            onChange={(e)=>setPassword(e.target.value)} 
+            onChange={(e)=>setEmail(e.target.value)} 
             inputProps={{
                 style:{color:'black'}
             }}

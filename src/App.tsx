@@ -9,6 +9,7 @@ import { MainScreen } from './screens/main.tsx';
 import BannerScreen from './screens/bannerScreen.tsx';
 import { useUser } from './contexts/userContext.tsx';
 import path from 'path';
+import { SignUp } from './screens/signUp.tsx';
 
 
 
@@ -58,7 +59,7 @@ const App = ()=> {
         </Route>
         <Route path='/banner/:movieid' element={<BannerScreen />}/>
         <Route path='/login' element={<Login handleAuth={handleAuth}/>}/>
-        <Route path='/signup' element={<Login handleAuth={handleAuth}/>}/>
+        <Route path='/signup' element={<SignUp handleAuth={handleAuth}/>}/>
         
       </Routes>
     </ThemeProvider>

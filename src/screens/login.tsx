@@ -47,7 +47,7 @@ export const Login = ({handleAuth}) => {
       await signIn(email, password).then(()=>navigate('/movies'));
       handleAuth(true)
     } catch (error) {
-      console.error('Error signing in:', error.message);
+      alert(`Error signing in: ${error.message}`);
       // Handle error
     }
   };
@@ -62,7 +62,7 @@ export const Login = ({handleAuth}) => {
   return (
     <Background>
         <StyledPaper elevation={3}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom color={'black'}>
         Sign In
       </Typography>
       <StyledForm>
@@ -77,6 +77,9 @@ export const Login = ({handleAuth}) => {
           autoComplete="email"
           autoFocus
           value={email}
+          inputProps={{
+            style:{color:'black'}
+        }}
           onChange={handleChange}
         />
         <TextField
@@ -90,6 +93,9 @@ export const Login = ({handleAuth}) => {
           id="password"
           value={password}
           onChange={handleChange2}
+          inputProps={{
+            style:{color:'black'}
+        }}
           autoComplete="current-password"
         />
         <StyledSubmitButton type="submit" fullWidth variant="contained" color="primary" onClick={handleSignIn} disabled={loading}>
