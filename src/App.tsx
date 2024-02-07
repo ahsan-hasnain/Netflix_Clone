@@ -7,13 +7,20 @@ import {Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { Login } from './screens/login.tsx';
 import { MainScreen } from './screens/main.tsx';
 import BannerScreen from './screens/bannerScreen.tsx';
-import { useUser } from './contexts/userContext.tsx';
-import path from 'path';
 import { SignUp } from './screens/signUp.tsx';
 
 
 
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   palette: {
     primary: {
       main: red[900]
